@@ -14,6 +14,16 @@ class CPMEwan:
     def __init__(self, access_key) -> None:
         self.auth_token = None
         self.access_key = access_key
+
+     def login(self, email, password) -> int:
+        payload = { "account_email": email, "account_password": password }
+        params = { "key": self.access_key }
+        response = requests.post(f"{BASE_URL}/account_login", params=params, data=payload)
+        response_decoded = response.json()
+        if response_decoded.get("ok"):
+            self.auth_token = response_decoded.get("auth")
+        return response_decoded.get("error")
+    
     
     def register(self, email, password) -> int:
         payload = { "account_email": email, "account_password": password }
