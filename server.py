@@ -15,7 +15,7 @@ class CPMEwan:
         self.auth_token = None
         self.access_key = access_key
 
-     def login(self, email, password) -> int:
+    def login(self, email, password) -> int:
         payload = { "account_email": email, "account_password": password }
         params = { "key": self.access_key }
         response = requests.post(f"{BASE_URL}/account_login", params=params, data=payload)
